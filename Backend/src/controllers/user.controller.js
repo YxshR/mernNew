@@ -29,8 +29,10 @@ const generateAccessAndRefreshToken = async(userId) => {
 }
 
 const registerUser = asyncHandler(async (req, res) => {
+
+    console.log("Uploaded Files:", req.files);
+    
     const {fullName, email, username, password } = req.body
-    console.log("email:", email)
 
     // if(fullName === "") {
     //     throw new ApiError(400 , "FullName is required")
@@ -41,6 +43,7 @@ const registerUser = asyncHandler(async (req, res) => {
     ){
         throw new ApiError(400, " All field are required")
     }
+
 
     const existedUser = await User.findOne({
         $or: [ {username}, {email} ]
